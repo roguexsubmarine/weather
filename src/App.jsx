@@ -1,4 +1,4 @@
-import WeatherAPI from "./components/WeatherAPI";
+import WeatherAPI from "./components/WeatherAPI.jsx";
 
 
 export function App() {
