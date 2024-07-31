@@ -1,4 +1,8 @@
 import sun_cloud from "../assets/sun-cloud.svg";
+import wind_img from "../assets/wind.svg";
+import humid_img from "../assets/humid.svg";
+import pressure_img from "../assets/pressure-gauge.png";
+
 
 import React, { useState, useEffect } from 'react';
 
@@ -74,20 +78,21 @@ const weatherData = () => {
           <p className=" font-normal text-lg">Good {isDay}</p>
 
           <div className="flex justify-around w-3/4 ">
+            
             <div className="flex flex-col">
-              <img src={sun_cloud} alt="sun cloud" />
-              <p>Wind</p>
-              <p>{windSpeed} KPH</p>
-            </div>
-
-            <div className="flex flex-col">
-              <p>icon</p>
+              <img src={humid_img} alt="wind" />
               <p>Humidity</p>
               <p>{humidity} %</p>
             </div>
 
             <div className="flex flex-col">
-              <p>icon</p>
+            <img src={wind_img} alt="wind" />
+              <p>Wind</p>
+              <p>{windSpeed} KPH</p>
+            </div>
+
+            <div className="flex flex-col">
+              <img src={pressure_img} alt="pressure img" />
               <p>Pressure</p>
               <p>{pressure} mbar</p>
             </div>
