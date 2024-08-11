@@ -1,8 +1,7 @@
-import sun_cloud from "../assets/sun-cloud.svg";
 import wind_img from "../assets/wind.svg";
 import humid_img from "../assets/humid.svg";
-import pressure_img from "../assets/pressure-gauge.png";
-
+import pressure_img from "../assets/barometer.svg";
+import WeatherIcon from "./Imgs.jsx";
 
 import React, { useState, useEffect } from 'react';
 
@@ -59,6 +58,10 @@ const weatherData = () => {
   const humidity = (curr ? curr.humidity : null);
   const pressure = (curr ? curr.pressure_mb : null);
 
+  const icon = WeatherIcon({code:code? code : 1000, isday:isDay });
+
+
+
 
 
 
@@ -68,37 +71,50 @@ const weatherData = () => {
 
   
   return (
-    <>
-      <p className=" text-3xl font-light uppercase mt-4">{loc ? loc.name : null}</p>
-          <p className=" uppercase font-semibold">{daysOfWeek[day]} {hour}:{min < 10 ? min = "0" + min : min}</p>
+    <div className="flex flex-col items-center min-h-screen justify-center">
+      <p className=" uppercase font-semibold mt-4 ">{daysOfWeek[day]} {hour}:{min < 10 ? min = "0" + min : min}</p>
+      <p className=" text-3xl font-light uppercase hover:underline underline-offset-8 decoration-sky-500 transition ease-in-out">{loc ? loc.name : null}</p>
 
-          <p className=" uppercase font-normal text-8xl">{curr ? curr.temp_c : null} {"\u00B0C"}</p>
-          <p className=" font-normal text-lg">{description} code {code}</p>
 
-          <p className=" font-normal text-lg">Good {isDay}</p>
+          <span className="flex justify-around">
+            <img src={icon} className="w-80 hover:translate-y-1 transition ease-in duration-800"/>
+          </span>
+          <p className=" font-normal text-lg text-sky-300 hover:text-gray-50 transition ease-in-out duration-300">{description}</p>
+          
+          <p className=" uppercase font-normal text-6xl m-8 drop-shadow-[0px_0px_15px_rgba(255,190,111,0.5)] hover:drop-shadow-[0px_0px_80px_rgba(255,255,255,0.5)] transition ease-in-out duration-1200">
+            {curr ? curr.temp_c : null}  {"\u00B0"}
+          </p>
+        
+          {/* <p className=" font-normal mb-4">Good {isDay}</p> */}
 
-          <div className="flex justify-around w-3/4 ">
-            
-            <div className="flex flex-col">
+          <div className="flex justify-around h-36 max-w-md w-3/4">
+
+            <div className="flex flex-col justify-around hover:drop-shadow-[0px_0px_20px_rgba(255,255,255,0.5)] transition ease-in-out duration-300">
+              <img src={wind_img} alt="wind" />
+              <div className="flex flex-col items-center">
+                <p>{windSpeed} KPH</p>
+                <p className="text-slate-500 text-sm">Wind</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-around hover:drop-shadow-[0px_0px_20px_rgba(98,160,234,0.5)] transition ease-in-out duration-300">
+              <img src={pressure_img} alt="pressure img" className=""/>
+              <div className="flex flex-col items-center">
+                <p>{pressure} mbar</p>
+                <p className="text-slate-500 text-sm">Pressure</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-around hover:drop-shadow-[0px_0px_20px_rgba(28,113,216,0.5)] transition ease-in-out duration-300">
               <img src={humid_img} alt="wind" />
-              <p>Humidity</p>
-              <p>{humidity} %</p>
-            </div>
-
-            <div className="flex flex-col">
-            <img src={wind_img} alt="wind" />
-              <p>Wind</p>
-              <p>{windSpeed} KPH</p>
-            </div>
-
-            <div className="flex flex-col">
-              <img src={pressure_img} alt="pressure img" />
-              <p>Pressure</p>
-              <p>{pressure} mbar</p>
+              <div className="flex flex-col items-center">
+                <p>{humidity} %</p>
+                <p className="text-slate-500 text-sm">Humidity</p> 
+              </div>
             </div>
 
           </div>
-    </>
+    </div>
   );
 };
 
